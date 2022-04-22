@@ -1,0 +1,21 @@
+{
+  "name": "organ-blocks-controller",
+  "version": "1.0.0",
+  "description": "The controller for the organ blocks app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "organ",
+    "blocks",
+    "server",
+    "node.js",
+    "express"
+  ],
+  "author": "Mohamad Kamar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
