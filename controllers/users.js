@@ -12,17 +12,15 @@ const register = async (req, res) => {
     password: hash,
   };
   let user = new User(userData);
-  try{
-    const registeredUser = await user.save()
+  try {
+    const registeredUser = await user.save();
 
-      let payload = { subject: registeredUser._id };
-      let token = jwt.sign(payload, hashKey);
-      res.status(200).send({ token });
-  }
-  catch(error){
+    let payload = { email, userId: registeredUser._id };
+    let token = jwt.sign(payload, hashKey);
+    res.status(200).send({ token });
+  } catch (error) {
     console.log(error);
-    res.json({error})
-
+    res.json({ error });
   }
 };
 
@@ -44,7 +42,7 @@ const login = async (req, res) => {
       return;
     }
 
-    let payload = { subject: user._id };
+    let payload = { email, userId: user._id };
     let token = jwt.sign(payload, hashKey);
     res.status(200).send({ token });
   } catch (error) {
