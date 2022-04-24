@@ -1,4 +1,4 @@
-module.exports = (model, whereClause) => {
+module.exports = (model) => {
   return async (req, res, next) => {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
@@ -22,7 +22,7 @@ module.exports = (model, whereClause) => {
       };
     }
     try {
-      results.results = await model.find({...whereClause}).limit(limit).skip(startIndex).exec();
+      results.results = await model.find({...req.auth}).limit(limit).skip(startIndex).exec();
       res.paginatedResults = results;
       next();
     } catch (e) {

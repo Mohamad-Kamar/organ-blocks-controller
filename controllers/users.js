@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-const hashKey = process.env.HASH_KEY;
+const tokenSecret = process.env.ACCESS_TOKEN_SECRET;
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -16,7 +16,7 @@ const register = async (req, res) => {
     const registeredUser = await user.save();
 
     let payload = { email, userId: registeredUser._id };
-    let token = jwt.sign(payload, hashKey);
+    let token = jwt.sign(payload, tokenSecret);
     res.status(200).send({ token });
   } catch (error) {
     console.log(error);
@@ -43,7 +43,7 @@ const login = async (req, res) => {
     }
 
     let payload = { email, userId: user._id };
-    let token = jwt.sign(payload, hashKey);
+    let token = jwt.sign(payload, tokenSecret);
     res.status(200).send({ token });
   } catch (error) {
     console.log(error);

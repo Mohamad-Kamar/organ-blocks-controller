@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const tokenSecret = process.env.ACCESS_TOKEN_SECRET;
+
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
@@ -11,7 +12,8 @@ module.exports = (req, res, next) => {
     } else {
       next();
     }
-  } catch {
+  } catch (error){
+    console.log(error)
     res.status(401).json({
       error: new Error("Invalid request!"),
     });
